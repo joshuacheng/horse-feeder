@@ -7,12 +7,19 @@ header {
     background-color: darkcyan;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
 }
 
 h1 {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: auto;
 }
 
 .head {

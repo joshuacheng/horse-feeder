@@ -33,63 +33,68 @@ def home():
 	return render_template('index.html') 
 
 # add a new horse
-@app.route('/new_horse')
-def new_horse():
+@app.route('/handle_request')
+def handleRequest():
 	# horse data
 	horse_code = request.args.get("code")
-	one = request.form.get("1")
-	two = request.form.get("2")
-	three = request.form.get("3")
-	four = request.form.get("4")
-	five = request.form.get("5")
+	print(horse_code)
+	one = request.args.get("1")
+	print(one)
+	two = request.args.get("2")
+	three = request.args.get("3")
+	four = request.args.get("4")
+	five = request.args.get("5")
+
+	if not horse_code:
+		return '''<html>
+    				<head>
+        				<title>Home Page - Microblog</title>
+    				</head>
+    				<body>
+        				<h1>please enter an id</h1>
+    				</body>
+				</html>'''
 
 	ref = db.collection(u'horses').document(horse_code)
-	ref.set({
-		'vitamin_1': {
-			'max': int(one),
-			'taken': 0
-		},
-		'vitamin_2': {
-<<<<<<< HEAD
-			'max': int(two),
-			'taken': 0
-		},
-		'vitamin_3': {
-			'max': int(three),
-			'taken': 0
-		},
-		'vitamin_4': {
-			'max': int(four),
-			'taken': 0
-		},
-		'vitamin_5':  {
-			'max': int(five),
-=======
-			'max': two,
-			'taken': 0
-		},
-		'vitamin_3': {
-			'max': three,
-			'taken': 0
-		},
-		'vitamin_4': {
-			'max': four,
-			'taken': 0
-		},
-		'vitamin_5':  {
-			'max': five,
->>>>>>> 686b722db28d6c0aeb709192c6203773041da5d7
-			'taken': 0
-		}
-	})
+
+	if request.args.get('new_horse'):
+		ref.set({
+			'vitamin_1': {
+				'max': int(one),
+				'taken': 0
+			},
+			'vitamin_2': {
+				'max': int(two),
+				'taken': 0
+			},
+			'vitamin_3': {
+				'max': int(three),
+				'taken': 0
+			},
+			'vitamin_4': {
+				'max': int(four),
+				'taken': 0
+			},
+			'vitamin_5':  {
+				'max': int(five),
+				'taken': 0
+			}
+		})
+		msg = 'set stuff successfully'
+	elif request.args.get('get_info'):
+		msg = 'get info!'
+
+		
 	print(ref.get().to_dict())
-	return render_template('submitted.html')
+
+	return render_template('submitted.html', msg = msg)
 
 # should this horse be fed the vitamin
 @app.route('/check_vitamin_dose')
 def check():
 	vitamin_name = request.args.get("vitamin_name")
-	return True
+
+	return 'yes'
 
 @app.route('/action')
 def action():

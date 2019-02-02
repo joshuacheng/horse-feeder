@@ -10,10 +10,11 @@
 </head>
 <body>
     <header>
-        <h1 class="head">Horse Feeder</h1>
+        <h1 class="head" style="flex-basis: 80%">Horse Feeder</h1>
+        <nav style="flex-basis: 20%"><p><a href="/check_vitamin_dose">Horse Stats</a></p></nav>
     </header>
     <h1>hi type your stuff in</h1> 
-    <form class="form-stuff" action="/new_horse">
+    <form class="form-stuff" action="/handle_request">
         Unique Code:
         <input type="text" name="code"> <br>
         <input type="text" name="1" class="feeds"> feed 1 <br>
@@ -21,7 +22,9 @@
         <input type="text" name="3" class="feeds"> feed 3 <br>
         <input type="text" name="4" class="feeds"> feed 4 <br>
         <input type="text" name="5" class="feeds"> feed 5 <br>
-        <input type="submit" value="submit">
+        <input type="submit" value="Submit" name="new_horse">
+        <input type="submit" value="Get Info" name="get_info">
     </form>
+    <form action=""></form>
 </body>
 </html>
