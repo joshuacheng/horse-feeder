@@ -37,11 +37,11 @@ def home():
 def new_horse():
 	# horse data
 	horse_code = request.args.get("code")
-	one = request.args.get("1")
-	two = request.args.get("2")
-	three = request.args.get("3")
-	four = request.args.get("4")
-	five = request.args.get("5")
+	one = request.form.get("1")
+	two = request.form.get("2")
+	three = request.form.get("3")
+	four = request.form.get("4")
+	five = request.form.get("5")
 
 	ref = db.collection(u'horses').document(horse_code)
 	ref.set({
@@ -50,6 +50,7 @@ def new_horse():
 			'taken': 0
 		},
 		'vitamin_2': {
+<<<<<<< HEAD
 			'max': int(two),
 			'taken': 0
 		},
@@ -63,6 +64,21 @@ def new_horse():
 		},
 		'vitamin_5':  {
 			'max': int(five),
+=======
+			'max': two,
+			'taken': 0
+		},
+		'vitamin_3': {
+			'max': three,
+			'taken': 0
+		},
+		'vitamin_4': {
+			'max': four,
+			'taken': 0
+		},
+		'vitamin_5':  {
+			'max': five,
+>>>>>>> 686b722db28d6c0aeb709192c6203773041da5d7
 			'taken': 0
 		}
 	})
@@ -82,6 +98,12 @@ def action():
 	print(res.text)
 	dictFromServer = res.json()
 	return "done"
+
+@app.route('/horse')
+def horse():
+	vitamin_name = request.args.get("horse")
+	print(vitamin_name)
+	return "fuckyea"
 
 if __name__ == '__main__':
 		app.run()

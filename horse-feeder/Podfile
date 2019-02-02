@@ -6,7 +6,12 @@ target 'horse-feeder' do
   use_frameworks!
 
   # Pods for horse-feeder
-
+pod 'Alamofire', '~> 4.7' 
+pod 'SwiftyJSON', '~> 4.0’
+pod 'Firebase/Core'
+pod 'Firebase/MLVision'
+# If using an on-device API:
+pod 'Firebase/MLVisionTextModel'
   target 'horse-feederTests' do
     inherit! :search_paths
     # Pods for testing
