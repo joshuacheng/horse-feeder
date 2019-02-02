@@ -43,19 +43,35 @@ def new_horse():
 
 	ref = db.collection(u'horses').document(horse_code)
 	ref.set({
-		'vitamin_1': one,
-		'vitamin_2': two, 
-		'vitamin_3': three, 
-		'vitamin_4': four, 
-		'vitamin_5': five
+		'vitamin_1': {
+			'max': one,
+			'taken': 0
+		},
+		'vitamin_2': {
+			'max': one,
+			'taken': 0
+		},
+		'vitamin_3': {
+			'max': one,
+			'taken': 0
+		},
+		'vitamin_4': {
+			'max': one,
+			'taken': 0
+		},
+		'vitamin_5':  {
+			'max': one,
+			'taken': 0
+		}
 	})
 
     # print(request.args)
     return render_template('submitted.html')
 
-# should this horse be fed
-@app.route('/check')
+# should this horse be fed the vitamin
+@app.route('/check_vitamin_dose')
 def check():
+	vitamin_name = request.args.get("vitamin_name")
 	return True
 
 if __name__ == '__main__':
