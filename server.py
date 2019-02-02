@@ -19,7 +19,12 @@ from gcloud import pubsub
 
 import socket
 
-# db = firestore.Client()
+cred = credentials.ApplicationDefault()
+firebase_admin.initialize_app(cred, {
+  'projectId': 'horse-feeder',
+})
+db = firestore.Client()
+
 # client = pubsub.Client('horse-feeder')
 app = Flask(__name__)
 
@@ -78,6 +83,13 @@ def check():
 @app.route('/action')
 def action():
 	dictToSend = {'horse':'horse01'}
+	users_ref = db.collection(u'horses')
+
+	docs = users_ref.get()
+
+	for doc in docs:
+	    print(u'{} => {}'.format(doc.id, doc.to_dict()))
+
 	res = requests.post('http://localhost:8000', json=dictToSend)
 	print(res.text)
 	dictFromServer = res.json()
