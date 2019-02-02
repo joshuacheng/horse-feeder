@@ -10,7 +10,6 @@ import base64
 import asyncio
 import websockets
 
-
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -19,7 +18,7 @@ from gcloud import pubsub
 
 import socket
 
-# db = firestore.Client()
+db = firestore.Client()
 # client = pubsub.Client('horse-feeder')
 app = Flask(__name__)
 
@@ -47,26 +46,27 @@ def new_horse():
 	ref = db.collection(u'horses').document(horse_code)
 	ref.set({
 		'vitamin_1': {
-			'max': one,
+			'max': int(one),
 			'taken': 0
 		},
 		'vitamin_2': {
-			'max': one,
+			'max': int(two),
 			'taken': 0
 		},
 		'vitamin_3': {
-			'max': one,
+			'max': int(three),
 			'taken': 0
 		},
 		'vitamin_4': {
-			'max': one,
+			'max': int(four),
 			'taken': 0
 		},
 		'vitamin_5':  {
-			'max': one,
+			'max': int(five),
 			'taken': 0
 		}
 	})
+	print(ref.get().to_dict())
 	return render_template('submitted.html')
 
 # should this horse be fed the vitamin
