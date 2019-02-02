@@ -83,5 +83,11 @@ def action():
 	dictFromServer = res.json()
 	return "done"
 
+@app.route('/horse')
+def horse():
+	vitamin_name = request.args.get("horse")
+	print(vitamin_name)
+	return "fuckyea"
+
 if __name__ == '__main__':
 		app.run()

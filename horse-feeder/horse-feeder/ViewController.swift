@@ -20,6 +20,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var captureSesssion : AVCaptureSession!
     var cameraOutput : AVCapturePhotoOutput!
     var previewLayer : AVCaptureVideoPreviewLayer!
+    var ngrok = "https://f05fa865.ngrok.io"
     
     @IBOutlet var previewView: UIView!
     
@@ -197,7 +198,12 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 let json = try! JSON(data: data)
                 let errorObj: JSON = json["error"]
                     let responses: JSON = json["responses"][0]
+            let name = responses["fullTextAnnotation"]["text"] as? String
+
                     print(responses["fullTextAnnotation"]["text"]) // HERE IT FRICKIN ISSSSSS GODNBLESLEKJSKLT
+            Alamofire.request("\(self.ngrok)/horse?horse=\(responses["fullTextAnnotation"]["text"].string!.dropLast(2))").response { response in
+                        print(response)
+                    }
             
             }
             
