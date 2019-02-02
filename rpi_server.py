@@ -11,13 +11,16 @@ GPIO.setmode(GPIO.BCM)
 def hello():
 
 	# do actions w rpi here
-	now = datetime.datetime.now()
-	timeString = now.strftime("%Y-%m-%d %H:%M")
-	templateData = {
-		'title' : 'HELLO!',
-		'time': timeString
-	}
-	return render_template('main.html', **templateData)
+
+
+
+	# now = datetime.datetime.now()
+	# timeString = now.strftime("%Y-%m-%d %H:%M")
+	# templateData = {
+	# 	'title' : 'HELLO!',
+	# 	'time': timeString
+	# }
+	return 'done'
 
 @app.route("/readPin/<pin>")
 def readPin(pin):
