@@ -1,11 +1,15 @@
 from flask import Flask, request, render_template
+
+# from quart import Quart, websocket
 # import urllib.request
 import requests
 import string
 import re
 import json
-# from image_line import execute_zhang_suen
 import base64
+import asyncio
+import websockets
+
 
 import firebase_admin
 from firebase_admin import credentials
@@ -13,18 +17,17 @@ from firebase_admin import db
 from google.cloud import firestore
 from gcloud import pubsub
 
-# import 'firebase/firestore'
+import socket
 
-# Fetch the service account key JSON file contents
-#cred = credentials.Certificate('horse-feeder-2175ba8ce0c1.json')
-# Initialize the app with a service account, granting admin privileges
-#firebase_admin.initialize_app(cred, {
-#	'databaseURL': 'https://horse-feeder.firebaseio.com/'
-#z})
-
-db = firestore.Client()
-client = pubsub.Client('horse-feeder')
+# db = firestore.Client()
+# client = pubsub.Client('horse-feeder')
 app = Flask(__name__)
+
+# async def abar(a):
+# 	async with websockets.connect('ws://localhost:8765') as websocket:
+# 		await websocket.send('horse01')
+
+# loop = asyncio.get_event_loop()
 
 @app.route('/')
 def home():
@@ -64,15 +67,21 @@ def new_horse():
 			'taken': 0
 		}
 	})
-
-    # print(request.args)
-    return render_template('submitted.html')
+	return render_template('submitted.html')
 
 # should this horse be fed the vitamin
 @app.route('/check_vitamin_dose')
 def check():
 	vitamin_name = request.args.get("vitamin_name")
 	return True
+
+@app.route('/action')
+def action():
+	dictToSend = {'horse':'horse01'}
+	res = requests.post('http://localhost:8000', json=dictToSend)
+	print(res.text)
+	dictFromServer = res.json()
+	return "done"
 
 if __name__ == '__main__':
 		app.run()
