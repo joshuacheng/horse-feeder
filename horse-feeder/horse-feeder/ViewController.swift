@@ -47,8 +47,14 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             print("some problem here")
         }
     }
+    var timer = Timer()
 
     @IBAction func takePhoto(_ sender: Any) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.take_pic), userInfo: nil, repeats: true)
+
+    }
+    
+    @objc func take_pic() {
         let settings = AVCapturePhotoSettings()
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [
