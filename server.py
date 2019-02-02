@@ -22,7 +22,8 @@ def new_horse():
     three = request.args.get("3")
     four = request.args.get("4")
     five = request.args.get("5")
-    return "hehe xd"
+    # print(request.args)
+    return render_template('submitted.html')
 
 if __name__ == '__main__':
         app.run()
