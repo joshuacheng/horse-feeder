@@ -10,8 +10,11 @@ import UIKit
 import Foundation
 import AVFoundation
 import Photos
-//import Alamofire
+import Alamofire
 //import SpeechToTextV1
+
+import Firebase
+import SwiftyJSON
 
 class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var captureSesssion : AVCaptureSession!
@@ -29,7 +32,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         cameraOutput = AVCapturePhotoOutput()
         
         let device = AVCaptureDevice.default(for: .video)
-
+        
         if let input = try? AVCaptureDeviceInput(device: device!) {
             if (captureSesssion.canAddInput(input)) {
                 captureSesssion.addInput(input)
@@ -48,10 +51,10 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         }
     }
     var timer = Timer()
-
+    
     @IBAction func takePhoto(_ sender: Any) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.take_pic), userInfo: nil, repeats: true)
-
+        
     }
     
     @objc func take_pic() {
@@ -83,10 +86,124 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
             let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
             
-            self.capturedImage.image = image
-        } else {
+                self.capturedImage.image = image
+            //            var json = {
+            //                    "requests": [
+            //                    {
+            //                    "image":{
+            //                    "content":"/9j/7QBEUGhvdG9...image contents...eYxxxzj/Coa6Bax//Z"
+            //                    },
+            //                    "features":[
+            //                    {
+            //                    "type":"LABEL_DETECTION",
+            //                    "maxResults":1
+            //                    }
+            //                    ]
+            //                    }
+            //                    ]
+            //            }
+            var image2 = UIImage(named: "lol")
+            capturedImage.image = image2
+            let imageData: Data? = UIImageJPEGRepresentation(image2!, 0.4)
+            let imageStr = imageData?.base64EncodedString(options: .lineLength64Characters)
+            let parameters = [
+                "requests": [
+                    "image": [
+                        "content": imageStr
+                    ],
+                    "features": [
+                        [
+                            "type": "LABEL_DETECTION",
+                            "maxResults": 10
+                        ],
+                        [
+                            "type": "FACE_DETECTION",
+                            "maxResults": 10
+                        ]
+                    ]
+                ]
+            ]
+            
+            //            print("hello")
+            //                Alamofire.request("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBi6k04pmZZNw5FWf0uqFHY1skme0-_FtE", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            //                    .responseJSON { response in
+            //                        print(response)
+            //                        print("did this even work")
+            //                }
+            // here
+            createRequest(with: imageStr!)
+            
+        }
+        
+        else {
             print("some error here")
         }
+    }
+    func createRequest(with imageBase64: String) {
+        // Create our request URL
+        
+        var googleAPIKey = "AIzaSyBi6k04pmZZNw5FWf0uqFHY1skme0-_FtE"
+        var googleURL: URL {
+            return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
+        }
+        var request = URLRequest(url: googleURL)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(Bundle.main.bundleIdentifier ?? "", forHTTPHeaderField: "X-Ios-Bundle-Identifier")
+        
+        // Build our API request
+        let jsonRequest = [
+            "requests": [
+                "image": [
+                    "content": imageBase64
+                ],
+                "features": [
+                    [
+                        "type": "LABEL_DETECTION",
+                        "maxResults": 10
+                    ],
+                    [
+                        "type": "FACE_DETECTION",
+                        "maxResults": 10
+                    ]
+                ]
+            ]
+        ]
+        let jsonObject = JSON(jsonRequest)
+        
+        // Serialize the JSON
+        guard let data = try? jsonObject.rawData() else {
+            return
+        }
+        
+        request.httpBody = data
+        
+        // Run the request on a background thread
+        DispatchQueue.global().async { self.runRequestOnBackgroundThread(request) }
+    }
+    let session = URLSession.shared
+    func runRequestOnBackgroundThread(_ request: URLRequest) {
+        // run the request
+        //        print("hello1")
+        let task: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "")
+                print("hello2")
+                return
+            }
+            print("---------------------")
+            print(data)
+            print(response)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                print(responseJSON)
+                // should be a horse ID
+                // post request to home server /action
+            }
+        }
+        
+        task.resume()
     }
     
     // This method you can use somewhere you need to know camera permission   state
