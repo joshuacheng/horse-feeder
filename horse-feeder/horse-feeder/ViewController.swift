@@ -54,7 +54,6 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     @IBAction func takePhoto(_ sender: Any) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.take_pic), userInfo: nil, repeats: true)
-        
     }
     
     @objc func take_pic() {
@@ -160,12 +159,12 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 ],
                 "features": [
                     [
-                        "type": "LABEL_DETECTION",
-                        "maxResults": 10
-                    ],
-                    [
-                        "type": "FACE_DETECTION",
-                        "maxResults": 10
+//                        "type": "TEXT_DETECTION",
+//                        "maxResults": 10
+//                    ],
+//                    [
+                        "type": "TEXT_DETECTION",
+                        "maxResults": 1
                     ]
                 ]
             ]
@@ -193,15 +192,16 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 return
             }
             print("---------------------")
-            print(data)
-            print(response)
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                print(responseJSON)
-                // should be a horse ID
-                // post request to home server /action
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            if let responseJSON = responseJSON as? [String: Any] {
+                let json = try! JSON(data: data)
+                let errorObj: JSON = json["error"]
+                    let responses: JSON = json["responses"][0]
+                    print(responses["fullTextAnnotation"]["text"]) // HERE IT FRICKIN ISSSSSS GODNBLESLEKJSKLT
+            
             }
-        }
+            
+        
         
         task.resume()
     }

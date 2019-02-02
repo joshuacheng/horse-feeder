@@ -38,11 +38,11 @@ def home():
 def new_horse():
 	# horse data
 	horse_code = request.args.get("code")
-	one = request.args.get("1")
-	two = request.args.get("2")
-	three = request.args.get("3")
-	four = request.args.get("4")
-	five = request.args.get("5")
+	one = request.form.get("1")
+	two = request.form.get("2")
+	three = request.form.get("3")
+	four = request.form.get("4")
+	five = request.form.get("5")
 
 	ref = db.collection(u'horses').document(horse_code)
 	ref.set({
@@ -51,19 +51,19 @@ def new_horse():
 			'taken': 0
 		},
 		'vitamin_2': {
-			'max': one,
+			'max': two,
 			'taken': 0
 		},
 		'vitamin_3': {
-			'max': one,
+			'max': three,
 			'taken': 0
 		},
 		'vitamin_4': {
-			'max': one,
+			'max': four,
 			'taken': 0
 		},
 		'vitamin_5':  {
-			'max': one,
+			'max': five,
 			'taken': 0
 		}
 	})
