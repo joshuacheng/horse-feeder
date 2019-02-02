@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-import urllib.request
+# import urllib.request
 import requests
 import string
 import re
@@ -49,7 +49,8 @@ def new_horse():
 		'vitamin_5': five
 	})
 
-	return "hehe xd"
+    # print(request.args)
+    return render_template('submitted.html')
 
 if __name__ == '__main__':
 		app.run()
