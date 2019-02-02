@@ -42,12 +42,12 @@ def handleRequest():
 
 	if not horse_code:
 		return '''<html>
-    				<head>
-        				<title>Home Page - Microblog</title>
-    				</head>
-    				<body>
-        				<h1>please enter an id</h1>
-    				</body>
+					<head>
+						<title>Home Page - Microblog</title>
+					</head>
+					<body>
+						<h1>please enter an id</h1>
+					</body>
 				</html>'''
 
 	ref = db.collection(u'horses').document(horse_code)
@@ -84,13 +84,22 @@ def handleRequest():
 
 	return render_template('submitted.html', msg = msg)
 
-# should this horse be fed the vitamin
+# GET / check_vitamin_dose : check if horse needs more vitamins for the day
 @app.route('/check_vitamin_dose')
 def check():
 	vitamin_name = request.args.get("vitamin_name")
+	horse_name = request.args.get("horse_code")
+
+	users_ref = db.collection(u'horses').document(horse_name).collection(vitamin_name)
+	try:
+		doc = users_ref.get()
+		print(doc)
+	except google.cloud.exceptions.NotFound:
+		print(u'No such document!')
 
 	return 'yes'
 
+# GET / action : execute action on RPi
 @app.route('/action')
 def action():
 	dictToSend = {'horse':'horse01'}
@@ -99,17 +108,24 @@ def action():
 	docs = users_ref.get()
 
 	for doc in docs:
-	    print(u'{} => {}'.format(doc.id, doc.to_dict()))
+		print(u'{} => {}'.format(doc.id, doc.to_dict()))
 
 	res = requests.post('http://localhost:8000', json=dictToSend)
 	print(res.text)
 	dictFromServer = res.json()
 	return "done"
 
+# GET / horse : get all information about horse
 @app.route('/horse')
 def horse():
 	vitamin_name = request.args.get("horse")
-	print(vitamin_name)
+	users_ref = db.collection(u'horses').document(vitamin_name)
+	try:
+		doc = users_ref.get()
+		print(u'Document data: {}'.format(doc.to_dict()))
+	except google.cloud.exceptions.NotFound:
+		print(u'No such document!')
+
 	return "fuckyea"
 
 if __name__ == '__main__':
