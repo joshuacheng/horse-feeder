@@ -30,6 +30,7 @@ app = Flask(__name__)
 def home():
 	return render_template('index.html') 
 
+# add a new horse
 @app.route('/new_horse')
 def new_horse():
 	# horse data
@@ -51,6 +52,11 @@ def new_horse():
 
     # print(request.args)
     return render_template('submitted.html')
+
+# should this horse be fed
+@app.route('/check')
+def check():
+	return True
 
 if __name__ == '__main__':
 		app.run()
