@@ -42,12 +42,12 @@ def handleRequest():
 
 	if not horse_code:
 		return '''<html>
-					<head>
-						<title>Home Page - Microblog</title>
-					</head>
-					<body>
-						<h1>please enter an id</h1>
-					</body>
+    				<head>
+        				<title>Failure!</title>
+    				</head>
+    				<body>
+        				<h1>please enter an id</h1>
+    				</body>
 				</html>'''
 
 	ref = db.collection(u'horses').document(horse_code)
@@ -75,14 +75,16 @@ def handleRequest():
 				'taken': 0
 			}
 		})
-		msg = 'set stuff successfully'
+		msg = 'set_server_data'
+		data = ''
 	elif request.args.get('get_info'):
-		msg = 'get info!'
+		msg = 'get_data'
+		data = ref.get().to_dict()
 
 		
-	print(ref.get().to_dict())
+	print(data)
 
-	return render_template('submitted.html', msg = msg)
+	return render_template('submitted.html', msg = msg, data = data)
 
 # GET / check_vitamin_dose : check if horse needs more vitamins for the day
 @app.route('/check_vitamin_dose')
