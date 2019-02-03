@@ -120,17 +120,19 @@ def action():
 # GET / horse : get all information about horse AND execute action on RPi
 @app.route('/horse')
 def horse():
-	vitamin_name = request.args.get("horse")
-	users_ref = db.collection(u'horses').document(vitamin_name)
+	horse_name = request.args.get("horse")
+	users_ref = db.collection(u'horses').document(horse_name)
 	try:
-		doc = users_ref.get()
-		print(u'Document data: {}'.format(doc.to_dict()))
-		dictToSend = format(doc.to_dict())
-		res = requests.post('http://localhost:8000', json=dictToSend)
+		doc = users_ref.get().to_dict()
+		print(u'Document data: {}'.format(doc))
+		dictToSend = {k: round(int(v['max']/3)) if v['taken'] < v['max'] else 0 for k, v in doc.items()}
+		# dictToSend = format(doc)
+		print(dictToSend.items())
+		# res = requests.post('http://localhost:8000', json=dictToSend)
 	except google.cloud.exceptions.NotFound:
 		print(u'No such document!')
 
-	return "fuckyea"
+	return 'fuckyea'
 
 if __name__ == '__main__':
 		app.run()
