@@ -12,6 +12,8 @@ time.sleep(3)
 
 # declare the pins we're using
 SWEEP_PIN = 9
+# initial angle of the rotor - should go from 0 to 180 degrees relative to the initial
+pos = 0
 
 # initialize the digital pin as output
 a.set_pin_mode(SWEEP_PIN,'O')
@@ -24,7 +26,7 @@ print 'Arduino initialized'
 @app.route('/', methods = ['POST','GET'])
 
 def sweep_pyduino():
-    # Post request to webpage - the user's selection of items
+    # Post request to webpage - the user's selection of items returns sequence of what buckets to stop at
     if request.method == 'POST':
         # if the bucket stops
         if request.form['submit'] == 'True': 
