@@ -1,6 +1,6 @@
 /*
  * Sketch to control the pins of Arduino via serial interface
- *
+ * Attributed to https://www.instructables.com/id/Pyduino-Interfacing-Arduino-with-Python-through-se/
  * Commands implemented with examples:
  *
  * - RD13 -> Reads the Digital input at pin 13
@@ -8,14 +8,17 @@
  * - WD13:1 -> Writes 1 (HIGH) to digital output pin 13
  * - WA6:125 -> Writes 125 to analog output pin 6 (PWM)
  */
+#include <Servo.h>
 
 char operation; // Holds operation (R, W, ...)
 char mode; // Holds the mode (D, A)
-int pin_number; // Holds the pin number
+int pin_number=9; // Holds the pin number
 int digital_value; // Holds the digital value
 int analog_value; // Holds the analog value
 int value_to_write; // Holds the value that we want to write
 int wait_for_transmission = 5; // Delay in ms in order to receive the serial data
+Servo servo;
+
 
 void set_pin_mode(int pin_number, char mode){
     /*
@@ -68,8 +71,9 @@ void analog_read(int pin_number){
 void digital_write(int pin_number, int digital_value){
     /*
      * Performs a digital write on pin_number with the digital_value
-     * The value must be 1 or 0
      */
+  servo.write(digital_value);
+  delay(100);
   digitalWrite(pin_number, digital_value);
 }
 
@@ -82,6 +86,7 @@ void analog_write(int pin_number, int analog_value){
 }
 
 void setup() {
+    servo.attach(pin_number);
     Serial.begin(9600); // Serial Port at 9600 baud
     Serial.setTimeout(100); // Instead of the default 1000ms, in order
                             // to speed up the Serial.parseInt() 

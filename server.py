@@ -128,7 +128,7 @@ def horse():
 		dictToSend = {k: round(int(v['max']/3)) if v['taken'] < v['max'] else 0 for k, v in doc.items()}
 		# dictToSend = format(doc)
 		print(dictToSend.items())
-		# res = requests.post('http://localhost:8000', json=dictToSend)
+		res = requests.post('http://localhost:8000', json=dictToSend)
 	except google.cloud.exceptions.NotFound:
 		print(u'No such document!')
 
