@@ -17,7 +17,6 @@
 		A1400122220574CE00FDE7AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1400120220574CE00FDE7AB /* LaunchScreen.storyboard */; };
 		A140012D220574CF00FDE7AB /* horse_feederTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140012C220574CF00FDE7AB /* horse_feederTests.swift */; };
 		A1400138220574CF00FDE7AB /* horse_feederUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1400137220574CF00FDE7AB /* horse_feederUITests.swift */; };
-		A1E5533722069B2700DD9774 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E5533822069B2700DD9774 /* SwiftyJSON.framework */; };
 		CDD2031DA21D8B8B036174A5 /* Pods_horse_feederUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994BC0AF0E2610C149B2A10B /* Pods_horse_feederUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,8 +58,6 @@
 		A1400133220574CF00FDE7AB /* horse-feederUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "horse-feederUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1400137220574CF00FDE7AB /* horse_feederUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = horse_feederUITests.swift; sourceTree = "<group>"; };
 		A1400139220574CF00FDE7AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1E5533822069B2700DD9774 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1E5533A22069B7300DD9774 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33A92B09F46D768012F28D6 /* Pods-horse-feederTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-horse-feederTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-horse-feederTests/Pods-horse-feederTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E700DEDADAF0C7C00E26FC70 /* Pods_horse_feederTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_horse_feederTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9CE5A25C0BAFB705E55107 /* Pods-horse-feederUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-horse-feederUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-horse-feederUITests/Pods-horse-feederUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,7 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1E5533722069B2700DD9774 /* SwiftyJSON.framework in Frameworks */,
 				1AD8F21B3F31C7DB6E8E2C07 /* Pods_horse_feeder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,8 +94,6 @@
 		71E17E98667D56E9D944C761 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A1E5533A22069B7300DD9774 /* Alamofire.framework */,
-				A1E5533822069B2700DD9774 /* SwiftyJSON.framework */,
 				5FE636B4AA19807C4A122758 /* Pods_horse_feeder.framework */,
 				E700DEDADAF0C7C00E26FC70 /* Pods_horse_feederTests.framework */,
 				994BC0AF0E2610C149B2A10B /* Pods_horse_feederUITests.framework */,
