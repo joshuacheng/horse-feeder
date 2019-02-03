@@ -48,7 +48,7 @@ def handleRequest():
 	if not horse_code:
 		return '''<html>
     				<head>
-        				<title>Home Page - Microblog</title>
+        				<title>Failure!</title>
     				</head>
     				<body>
         				<h1>please enter an id</h1>
@@ -80,14 +80,16 @@ def handleRequest():
 				'taken': 0
 			}
 		})
-		msg = 'set stuff successfully'
+		msg = 'set_server_data'
+		data = ''
 	elif request.args.get('get_info'):
-		msg = 'get info!'
+		msg = 'get_data'
+		data = ref.get().to_dict()
 
 		
-	print(ref.get().to_dict())
+	print(data)
 
-	return render_template('submitted.html', msg = msg)
+	return render_template('submitted.html', msg = msg, data = data)
 
 # should this horse be fed the vitamin
 @app.route('/check_vitamin_dose')
