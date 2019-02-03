@@ -115,7 +115,7 @@ def action():
 	dictFromServer = res.json()
 	return "done"
 
-# GET / horse : get all information about horse
+# GET / horse : get all information about horse AND execute action on RPi
 @app.route('/horse')
 def horse():
 	vitamin_name = request.args.get("horse")
@@ -123,6 +123,8 @@ def horse():
 	try:
 		doc = users_ref.get()
 		print(u'Document data: {}'.format(doc.to_dict()))
+		dictToSend = format(doc.to_dict())
+		res = requests.post('http://localhost:8000', json=dictToSend)
 	except google.cloud.exceptions.NotFound:
 		print(u'No such document!')
 
