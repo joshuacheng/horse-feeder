@@ -102,9 +102,9 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             //                    }
             //                    ]
             //            }
-            var image2 = UIImage(named: "lol")
-            capturedImage.image = image2
-            let imageData: Data? = UIImageJPEGRepresentation(image2!, 0.4)
+//            var image2 = UIImage(named: "lol")
+//            capturedImage.image = image2
+            let imageData: Data? = UIImageJPEGRepresentation(image, 0.4)
             let imageStr = imageData?.base64EncodedString(options: .lineLength64Characters)
             let parameters = [
                 "requests": [
@@ -198,10 +198,11 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 let json = try! JSON(data: data)
                 let errorObj: JSON = json["error"]
                     let responses: JSON = json["responses"][0]
-            let name = responses["fullTextAnnotation"]["text"] as? String
-
+            var name = responses["fullTextAnnotation"]["text"].string ?? ""
+            name = String(name.filter { !" \n\t\r".contains($0) })
+            
                     print(responses["fullTextAnnotation"]["text"]) // HERE IT FRICKIN ISSSSSS GODNBLESLEKJSKLT
-            Alamofire.request("\(self.ngrok)/horse?horse=\(responses["fullTextAnnotation"]["text"].string!.dropLast(2))").response { response in
+            Alamofire.request("\(self.ngrok)/horse?horse=\(name)").response { response in
                         print(response)
                     }
             
