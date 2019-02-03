@@ -6,7 +6,7 @@ target 'horse-feeder' do
   use_frameworks!
 
   # Pods for horse-feeder
-pod 'Alamofire', '~> 4.7' 
+pod 'Alamofire', '~> 4.4’ 
 pod 'SwiftyJSON', '~> 4.0’
 pod 'Firebase/Core'
 pod 'Firebase/MLVision'
