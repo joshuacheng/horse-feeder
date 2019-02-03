@@ -20,7 +20,7 @@ class ViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var captureSesssion : AVCaptureSession!
     var cameraOutput : AVCapturePhotoOutput!
     var previewLayer : AVCaptureVideoPreviewLayer!
-    var ngrok = "https://f05fa865.ngrok.io"
+    var ngrok = "https://3f0a55f6.ngrok.io"
     
     @IBOutlet var previewView: UIView!
     

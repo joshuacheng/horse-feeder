@@ -9,8 +9,20 @@
     <script src="main.js"></script>
 </head>
 <body>
+    <header>
+        <h1 class="head" style="flex-basis: 80%">Horse Feeder</h1>
+        <nav style="flex-basis: 20%"><p><a href="/check_vitamin_dose">Horse Stats</a></p></nav>
+    </header>
     <p>good job on submitting, here is your message: 
         {{ msg }}
     </p>
+   {% if data %}
+    <ol>
+        {% for vitamin in data.items() %}
+        <li>{{ vitamin }}</li>
+        {% endfor %}
+    </ol>
+    {% endif %}
+
 </body>
 </html>
