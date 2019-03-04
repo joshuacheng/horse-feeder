@@ -1,0 +1,1 @@
+{"vitamin_1":0, "vitamin_2":0, "vitamin_3":1, "vitamin_4":1, "vitamin_5":1}
