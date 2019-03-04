@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # yeet hay（熱氣）
 
 This device allows horses to decide when they want to receive food, allocating a portion of a horse's daily feed when it taps a sensor.
