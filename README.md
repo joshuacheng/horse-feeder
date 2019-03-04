@@ -16,7 +16,7 @@ We automated the process by giving each horse a coded profile, such that when a 
 
 We used an Arudino to rotate the servo motor, that was attached to a platform that allowed food to fall through. Ideally, in a production level model, the food would fall into the cup sitting under into it, and there would be no gaps such that once rotating away from a cup (which would be a tube of feed/nutrition), no food would fall through into the cup following that. 
 
-![](readme.mp4)
+![Demo](https://gifs.com/gif/yeethay-91QgYJ)
 
 ### Software
 
