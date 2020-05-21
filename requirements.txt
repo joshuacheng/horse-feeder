@@ -48,7 +48,7 @@ EbookLib==0.15
 et-xmlfile==1.0.1
 fastcache==1.0.2
 flake8==3.5.0
-Flask==0.12
+Flask==1.0
 Flask-Cors==3.0.2
 gcloud==0.17.0
 gevent==1.2.1
