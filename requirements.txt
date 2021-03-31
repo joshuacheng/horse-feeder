@@ -85,7 +85,7 @@ lazy-object-proxy==1.2.2
 llvmlite==0.15.0
 locket==0.2.0
 lockfile==0.12.2
-lxml==3.7.2
+lxml==4.6.3
 manage==0.1.13
 MarkupSafe==0.23
 matplotlib==3.0.0
